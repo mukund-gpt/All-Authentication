@@ -2,13 +2,12 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseConfig';
 import { RecaptchaVerifier, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
-import { set } from 'firebase/database';
 
 const PhoneAuth = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [verificationId, setVerificationId] = useState(null);
-//   const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   const setUpRecaptcha = () => {
     if (!window.recaptchaVerifier) {
@@ -33,7 +32,16 @@ const PhoneAuth = () => {
       setVerificationId(verificationId);
       alert("Verification code sent to your phone");
     } catch (error) {
-      console.error("Error during phone authentication", error);
+        if(error.code==='auth/invalid-phone-number'){
+            setError("Invalid Phone Number")
+        }
+        else if(error.code==='auth/network-request-failed'){
+            setError("Network Error")
+        }
+        else{
+            setError(error.message)
+            console.error("Error during phone authentication", error);
+        }
     }
   };
 
@@ -45,10 +53,13 @@ const PhoneAuth = () => {
     } catch (error) {
         if(error.code==='auth/invalid-verification-code'){
             setError("Invalid Verification Code")
-        }else{
+        }
+        else if(error.code==='auth/network-request-failed'){
+            setError("Network Error")
+        }
+        else{
             console.error("Error verifying code", error);
-            // setError(error.message)
-
+            setError(error.message)
         }
       
     }
@@ -63,7 +74,7 @@ const PhoneAuth = () => {
           type="text"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          placeholder="+1234567890"
+          placeholder="+911234567890"
         />
         <button onClick={sendVerificationCode}>Send Verification Code</button>
       </div>
@@ -77,6 +88,8 @@ const PhoneAuth = () => {
             onChange={(e) => setVerificationCode(e.target.value)}
           />
           <button onClick={verifyCode}>Verify Code</button>
+            {error && <p>{error}</p>}
+
         </div>
       )}
     </div>
