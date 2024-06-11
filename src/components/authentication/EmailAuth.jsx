@@ -10,29 +10,47 @@ const EmailAuth = () => {
 
   const handleSignUp = async () => {
     try {
-      await createUserWithEmailAndPassword(auth,email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
-        if(error.code==='auth/email-already-in-use'){
-            setError("Email Already, Sign In")
-        }
-        else{
-            setError(error.message);
-        }
-      
+      if (error.code === 'auth/email-already-in-use') {
+        setError("Email Already, Sign In")
+      }
+      else if (error.code === 'auth/missing-password') {
+        setError("Enter the password")
+      }
+      else if (error.code === 'auth/invalid-email') {
+        setError("Enter a valid Email")
+      }
+      else if (error.code === 'auth/network-request-failed') {
+        setError("Network Error")
+      }
+      else {
+        setError(error.message);
+      }
+
     }
   };
 
   const handleSignIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth,email, password);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-        if(error.code==='auth/invalid-credential'){
-            setError("Wrong Password")
-        }
-        else{
-            setError(error.message);
-        }
-      
+      if (error.code === 'auth/invalid-credential') {
+        setError("Wrong Password")
+      }
+      else if (error.code === 'auth/missing-password') {
+        setError("Enter the password")
+      }
+      else if (error.code === 'auth/invalid-email') {
+        setError("Enter a valid Email")
+      }
+      else if (error.code === 'auth/network-request-failed') {
+        setError("Network Error")
+      }
+      else {
+        setError(error.message);
+      }
+
     }
   };
 
