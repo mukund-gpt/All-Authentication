@@ -5,6 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import EmailAuth from './EmailAuth';
 
 
+
 const Auth = () => {
   const [user] = useAuthState(auth);
 
@@ -64,6 +65,7 @@ const Auth = () => {
           <button onClick={signInWithFacebook}>Sign in with Facebook</button>
           <button onClick={signInWithGitHub}>Sign in with GitHub</button>
           <EmailAuth/>
+         
           
           {error && <p>{error}</p>}
           

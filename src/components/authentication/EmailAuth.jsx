@@ -10,10 +10,15 @@ const EmailAuth = () => {
 
   const handleSignUp = async () => {
     try {
-    
       await createUserWithEmailAndPassword(auth,email, password);
     } catch (error) {
-      setError(error.message);
+        if(error.code==='auth/email-already-in-use'){
+            setError("Email Already, Sign In")
+        }
+        else{
+            setError(error.message);
+        }
+      
     }
   };
 
@@ -21,7 +26,13 @@ const EmailAuth = () => {
     try {
       await signInWithEmailAndPassword(auth,email, password);
     } catch (error) {
-      setError(error.message);
+        if(error.code==='auth/invalid-credential'){
+            setError("Wrong Password")
+        }
+        else{
+            setError(error.message);
+        }
+      
     }
   };
 
