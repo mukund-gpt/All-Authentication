@@ -56,7 +56,7 @@ const EmailAuth = () => {
 
   return (
     <div>
-      <h2>Email/Password Authentication</h2>
+      <h2>Login With Email</h2>
       <input
         type="email"
         placeholder="Email"

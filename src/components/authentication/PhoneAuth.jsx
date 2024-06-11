@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseConfig';
 import { RecaptchaVerifier, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
-
+import './auth.css'
 const PhoneAuth = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
@@ -65,8 +65,8 @@ const PhoneAuth = () => {
   };
 
   return (
-    <div>
-      <h3>Phone Authentication</h3>
+    <div className='phone'>
+      <h3>Login with OTP</h3>
       <div>
         <label>Phone Number:</label>
         <input
