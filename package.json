@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dotlottie/player-component": "^2.7.12",
     "firebase": "^10.12.2",
+    "install": "^0.13.0",
+    "lottie-react": "^2.4.0",
+    "npm": "^10.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1"

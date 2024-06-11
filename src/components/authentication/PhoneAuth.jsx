@@ -1,4 +1,3 @@
-// src/PhoneAuth.js
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseConfig';
 import { RecaptchaVerifier, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
