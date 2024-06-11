@@ -3,6 +3,7 @@ import { auth } from '../firebase/firebaseConfig';
 import { GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import EmailAuth from './EmailAuth';
+import PhoneAuth from './PhoneAuth';
 
 
 
@@ -61,10 +62,12 @@ const Auth = () => {
         </div>
       ) : (
         <div>
+          <EmailAuth/>
+          <PhoneAuth/>
           <button onClick={signInWithGoogle}>Sign in with Google</button>
           <button onClick={signInWithFacebook}>Sign in with Facebook</button>
           <button onClick={signInWithGitHub}>Sign in with GitHub</button>
-          <EmailAuth/>
+          
          
           
           {error && <p>{error}</p>}
